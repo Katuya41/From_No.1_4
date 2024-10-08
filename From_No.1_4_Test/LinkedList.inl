@@ -300,8 +300,8 @@ bool LinkedList<T>::ConstIterator::operator!=(const LinkedList<T>::ConstIterator
 */
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++() {
-    //assert(Node != nullptr && "Iterator points to null!");
-    //assert(Node->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
     this->Node = this->Node->Next;
     return *this;
 }
@@ -312,8 +312,8 @@ typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++() {
 */
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
-    //assert(Node != nullptr && "Iterator points to null!");
-    //assert(Node->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
     LinkedList::Iterator it;
     it.Node = this->Node;
     this->Node = this->Node->Next;
@@ -326,8 +326,8 @@ typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
 */
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator--() {
-    //assert(Node != nullptr && "Iterator points to null!");
-    //assert(Node->Prev->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(this->Node->Prev->Data != nullptr && "Iterator points to Dummy!");
     this->Node = this->Node->Prev;
     return *this;
 }
@@ -338,8 +338,8 @@ typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator--() {
 */
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator--(int) {
-    //assert(Node != nullptr && "Iterator points to null!");
-    //assert(Node->Prev->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(this->Node->Prev->Data != nullptr && "Iterator points to Dummy!");
     LinkedList::Iterator it;
     it.Node = this->Node;
     this->Node = this->Node->Prev;
@@ -352,8 +352,8 @@ typename LinkedList<T>::Iterator LinkedList<T>::Iterator::operator--(int) {
 */
 template <typename T>
 T* LinkedList<T>::Iterator::operator*() {
-    //assert(Node != nullptr && "Iterator points to null!");
-    //assert(Node->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
     return this->Node->Data;
 }
 
