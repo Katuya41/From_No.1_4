@@ -35,14 +35,14 @@ int main(void)
     }
 
     //ソートする
-    List.Sort(List, [](DATA* a, DATA* b) {return a->Score > b->Score; });
+    List.Sort(List, [](DATA a, DATA b) {return a.Score < b.Score; });
 
     //リストの中身を最初から末尾まで表示
     //Display(List);
     it = List.GetBegin();
     for (it == List.GetBegin(); it != List.GetEnd(); it++)
     {
-        printf("スコア: %d ,名前: %s \n", (*it)->Score, (*it)->Name.c_str());
+        printf("スコア: %d ,名前: %s \n", (*it).Score, (*it).Name.c_str());
     }
 
     file.close();
