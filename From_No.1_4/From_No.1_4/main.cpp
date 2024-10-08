@@ -35,7 +35,7 @@ int main(void)
     }
 
     //ソートする
-    List.Sort(List, [](DATA a, DATA b) {return a.Score < b.Score; });
+    List.Sort([](DATA a, DATA b) {return a.Score < b.Score; });
 
     //リストの中身を最初から末尾まで表示
     //Display(List);

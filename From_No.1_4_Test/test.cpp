@@ -18,7 +18,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			//list.Sort(list, [](const DATA& a, const DATA& b) {return a.Score < b.Score; });
 			//EXPECT_EQ(false, list.Sort(list, INT_KEY, true));
-			EXPECT_EQ(false, list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; }));
+			EXPECT_EQ(false, list.Sort([](DATA a, DATA b) {return a.Score > b.Score; }));
 
 		}
 
@@ -33,7 +33,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			list.Insert(list.GetBegin(), { 10,"Test" });
 			//EXPECT_EQ(false, list.Sort(list, std::function( list.GetBegin() > it), true));
-			EXPECT_EQ(false, list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; }));
+			EXPECT_EQ(false, list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; }));
 
 		}
 
@@ -50,7 +50,7 @@ namespace ex01_DataStructure
 			list.Insert(list.GetBegin(), { 30,"bbb" });
 			list.Insert(list.GetBegin(), { 10,"ccc" });
 			//list.Sort(list, INT_KEY,true);
-			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
+			list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
 			DATA Data;
 			Data.Name = "ccc";
@@ -86,7 +86,7 @@ namespace ex01_DataStructure
 			list.Insert(list.GetBegin(), { 20,"Test2" });
 			list.Insert(list.GetBegin(), { 10,"Test1" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
+			list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
 			DATA Data;
 			Data.Name = "Test1";
@@ -119,7 +119,7 @@ namespace ex01_DataStructure
 			list.Insert(list.GetEnd(), { 20,"Test2" });
 			list.Insert(list.GetEnd(), { 30,"Test3" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
+			list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
 			DATA Data;
 			Data.Name = "Test1";
@@ -153,7 +153,7 @@ namespace ex01_DataStructure
 			list.Insert(list.GetEnd(), { 30,"Test3" });
 			list.Insert(list.GetEnd(), { 10,"Test1" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
+			list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; });
 			list.Insert(list.GetEnd(), { 40,"Test4" });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
 			DATA Data;
@@ -187,7 +187,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			list.Insert(list.GetEnd(), { 30,"Test3" });
 			list.Insert(list.GetEnd(), { 10,"Test1" });
-			EXPECT_EQ(false, list.Sort(list, nullptr));
+			EXPECT_EQ(false, list.Sort(nullptr));
 		}
 	}
 }

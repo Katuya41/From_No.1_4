@@ -15,17 +15,14 @@ int LinkedList<T>::GetDataNum() const { return DataNum; }
     * @param _name   受け取ったデータの名前
     */
 template <typename T>
-bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, const T& _data)
+bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, T _data)
 {
     //イテレータが空じゃないか確認
     if (!_it.IsEmpty())
     {
         //新しいノード作成
         NODE* NewNode = new NODE();
-        T* Data = new T();
-        Data->Score = _data.Score;
-        Data->Name = _data.Name;
-        NewNode->Data = Data;
+        NewNode->Data = new T(_data);
         NewNode->Next = _it.Node;
         NewNode->Prev = _it.Node->Prev;
         _it.Node->Prev->Next = NewNode;
@@ -140,9 +137,9 @@ typename bool LinkedList<T>::ConstIterator::IsEmpty() { return Node == nullptr; 
      * @param 降順か昇順か(>で昇順 , <で降順)
      */
 template <typename T>
-bool LinkedList<T>::Sort(LinkedList<T>& _list, std::function<bool(T, T)> _compare) {
+bool LinkedList<T>::Sort(std::function<bool(T, T)> _compare) {
     //要素数が1以上か
-    if (_list.GetDataNum() <= 1)
+    if (this->GetDataNum() <= 1)
         return false;
 
     //比較関数がnullptrの場合
@@ -151,11 +148,11 @@ bool LinkedList<T>::Sort(LinkedList<T>& _list, std::function<bool(T, T)> _compar
     }
 
     // リストの最後のノードを探す
-    Iterator it = _list.GetEnd();
+    Iterator it = this->GetEnd();
     it--;
 
     // クイックソートの呼び出し
-    Sort(_list.GetBegin().Node, it.Node, _compare);
+    Sort(this->GetBegin().Node, it.Node, _compare);
 
     return true;
 }
@@ -225,9 +222,9 @@ typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, 
 */
 template <typename T>
 void LinkedList<T>::Swap(T& _data1, T& _data2) {
-    T temp = _data1;
-    _data1 = _data2;
-    _data2 = temp;
+    T temp = std::move(_data1);
+    _data1 = std::move(_data2);
+    _data2 = std::move(temp);
 }
 
 //コンストイテレータクラスのオペレータ

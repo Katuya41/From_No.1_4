@@ -42,6 +42,15 @@ private:
     //データの数
     int DataNum = 0;
 
+    /*
+    * クイックソートを行う関数です
+    * @param 最初のノード
+    * @param 最後のノード
+    * @param 降順か昇順か
+    */
+    void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
+
+
 public:
     /**
      * LinkedListクラスのコンストラクタ。
@@ -65,7 +74,7 @@ public:
     * @param _score  受け取ったデータのスコア
     * @param _name   受け取ったデータの名前
     */
-    bool Insert(LinkedList<T>::ConstIterator& _it, const T& _data);
+    bool Insert(LinkedList<T>::ConstIterator& _it, T _data);
 
     /**
     * コンストイテレータを使用してリストの要素を削除する関数です。
@@ -114,15 +123,8 @@ public:
      * @param リスト
      * @param 降順か昇順か(>で昇順 , <で降順)
      */
-    bool Sort(LinkedList<T>& _list, std::function<bool(T, T)> _compare);
+    bool Sort(std::function<bool(T, T)> _compare);
 
-    /*
-     * クイックソートを行う関数です
-     * @param 最初のノード
-     * @param 最後のノード
-     * @param 降順か昇順か
-     */
-    void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
 
     /*
      * 分割を行う関数です
