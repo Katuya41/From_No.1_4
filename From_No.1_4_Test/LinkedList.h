@@ -87,22 +87,34 @@ public:
 
     /*
     * 末尾イテレータを取得する関数です。
-    * @return 先頭イテレータ
+    * @return ダミーノード
     */
     LinkedList<T>::Iterator GetEnd();
 
     /*
+    * 末尾イテレータを取得する関数です。
+    * @return 末尾イテレータ
+    */
+    LinkedList<T>::Iterator Getend();
+
+    /*
      * 末尾コンストイテレータを取得する関数です。
-     * @return 先頭イテレータ
+     * @return ダミーノード
      */
     LinkedList<T>::ConstIterator GetConstEnd();
+
+    /*
+     * 末尾コンストイテレータを取得する関数です。
+     * @return 末尾イテレータ
+     */
+    LinkedList<T>::ConstIterator GetConstend();
 
     /*
      * クイックソートを行う関数です
      * @param リスト
      * @param 降順か昇順か(>で昇順 , <で降順)
      */
-    bool Sort(LinkedList<T>& _list, std::function<bool(T*, T*)> _compare);
+    bool Sort(LinkedList<T>& _list, std::function<bool(T, T)> _compare);
 
     /*
      * クイックソートを行う関数です
@@ -110,7 +122,7 @@ public:
      * @param 最後のノード
      * @param 降順か昇順か
      */
-    void Sort(NODE* _low, NODE* _high, std::function<bool(T*, T*)> _compare);
+    void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
 
     /*
      * 分割を行う関数です
@@ -118,14 +130,14 @@ public:
      * @param 最後のノード
      * @param 降順か昇順か
      */
-    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(T*, T*)> _compare);
+    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(T&, T&)> _compare);
 
     /*
      * 交換を行う関数です
      * @param 交換するデータ1
      * @param 交換するデータ2
      */
-    void Swap(T* _data1, T* _data2);
+    void Swap(T& _data1, T& _data2);
 
     /*
     * これはConstIteratorクラスの説明です。
@@ -157,7 +169,7 @@ public:
          * イテレータを末尾に向かって進めるオペレータです(前置インクリメント)
          * @return 次のノードを取得したイテレータを返します
         */
-        LinkedList::ConstIterator operator++();
+        LinkedList::ConstIterator& operator++();
 
         /*
          * イテレータを末尾に向かって進めるオペレータです(後置インクリメント)
@@ -169,7 +181,7 @@ public:
          * イテレータを先頭に向かって進めるオペレータです(前置インクリメント)
          * @return 前ノードを取得したイテレータを返します
         */
-        LinkedList::ConstIterator operator--();
+        LinkedList::ConstIterator& operator--();
 
         /*
          * イテレータを先頭に向かって進めるオペレータです(後置インクリメント)
@@ -181,7 +193,7 @@ public:
          * イテレータのさす要素を取得するオペレータ(const)です
          * @return ノードを返します
         */
-        const T* operator*() const;
+        const T& operator*() const;
         /*
          * コピ－コンストラクタです
         */
@@ -229,7 +241,7 @@ public:
          * イテレータを末尾に向かって進めるオペレータです(前置インクリメント)
          * @return 次のノードを取得したイテレータを返します
         */
-        LinkedList::Iterator operator++();
+        LinkedList::Iterator& operator++();
 
         /*
          * イテレータを末尾に向かって進めるオペレータです(後置インクリメント)
@@ -241,7 +253,7 @@ public:
          * イテレータを先頭に向かって進めるオペレータです(前置インクリメント)
          * @return 前ノードを取得したイテレータを返します
         */
-        LinkedList::Iterator operator--();
+        LinkedList::Iterator& operator--();
 
         /*
          * イテレータを先頭に向かって進めるオペレータです(後置インクリメント)
@@ -253,7 +265,7 @@ public:
          * イテレータのさす要素を取得する(非const)関数です。
          * @return イテレータの要素を返します
         */
-        T* operator*();
+        T& operator*();
 
         /*
          * 比較するオペレータです

@@ -18,7 +18,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			//list.Sort(list, [](const DATA& a, const DATA& b) {return a.Score < b.Score; });
 			//EXPECT_EQ(false, list.Sort(list, INT_KEY, true));
-			EXPECT_EQ(false, list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; }));
+			EXPECT_EQ(false, list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; }));
 
 		}
 
@@ -33,7 +33,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			list.Insert(list.GetBegin(), { 10,"Test" });
 			//EXPECT_EQ(false, list.Sort(list, std::function( list.GetBegin() > it), true));
-			EXPECT_EQ(false, list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; }));
+			EXPECT_EQ(false, list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; }));
 
 		}
 
@@ -50,25 +50,25 @@ namespace ex01_DataStructure
 			list.Insert(list.GetBegin(), { 30,"bbb" });
 			list.Insert(list.GetBegin(), { 10,"ccc" });
 			//list.Sort(list, INT_KEY,true);
-			list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; });
+			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
-			DATA* Data = new DATA();
-			Data->Name = "ccc";
-			Data->Score = 10;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			DATA Data;
+			Data.Name = "ccc";
+			Data.Score = 10;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "aaa";
-			Data->Score = 20;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "aaa";
+			Data.Score = 20;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "bbb";
-			Data->Score = 30;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "bbb";
+			Data.Score = 30;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 
 		}
@@ -86,23 +86,23 @@ namespace ex01_DataStructure
 			list.Insert(list.GetBegin(), { 20,"Test2" });
 			list.Insert(list.GetBegin(), { 10,"Test1" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; });
+			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
-			DATA* Data = new DATA();
-			Data->Name = "Test1";
-			Data->Score = 10;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			DATA Data;
+			Data.Name = "Test1";
+			Data.Score = 10;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "Test2";
-			Data->Score = 20;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "Test2";
+			Data.Score = 20;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 		}
 
@@ -119,25 +119,25 @@ namespace ex01_DataStructure
 			list.Insert(list.GetEnd(), { 20,"Test2" });
 			list.Insert(list.GetEnd(), { 30,"Test3" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; });
+			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
-			DATA* Data = new DATA();
-			Data->Name = "Test1";
-			Data->Score = 10;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			DATA Data;
+			Data.Name = "Test1";
+			Data.Score = 10;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "Test2";
-			Data->Score = 20;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "Test2";
+			Data.Score = 20;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "Test3";
-			Data->Score = 30;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "Test3";
+			Data.Score = 30;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 		}
 
@@ -153,26 +153,26 @@ namespace ex01_DataStructure
 			list.Insert(list.GetEnd(), { 30,"Test3" });
 			list.Insert(list.GetEnd(), { 10,"Test1" });
 			//list.Sort(list, INT_KEY, true);
-			list.Sort(list, [](DATA* a, DATA* b) {return a->Score > b->Score; });
+			list.Sort(list, [](DATA a, DATA b) {return a.Score > b.Score; });
 			list.Insert(list.GetEnd(), { 40,"Test4" });
 			LinkedList<DATA>::Iterator it = list.GetBegin();
-			DATA* Data = new DATA();
-			Data->Name = "Test1";
-			Data->Score = 10;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			DATA Data;
+			Data.Name = "Test1";
+			Data.Score = 10;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "Test3";
-			Data->Score = 30;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "Test3";
+			Data.Score = 30;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 			it++;
-			Data->Name = "Test4";
-			Data->Score = 40;
-			EXPECT_EQ(Data->Score, (*it)->Score);
-			EXPECT_EQ(Data->Name, (*it)->Name);
+			Data.Name = "Test4";
+			Data.Score = 40;
+			EXPECT_EQ(Data.Score, (*it).Score);
+			EXPECT_EQ(Data.Name, (*it).Name);
 			//EXPECT_EQ(Data, (*it));
 		}
 
