@@ -222,9 +222,9 @@ typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, 
 */
 template <typename T>
 void LinkedList<T>::Swap(T& _data1, T& _data2) {
-    T temp = _data1;
-    _data1 = _data2;
-    _data2 = temp;
+    T temp = std::move(_data1);
+    _data1 = std::move(_data2);
+    _data2 = std::move(temp);
 }
 
 //コンストイテレータクラスのオペレータ

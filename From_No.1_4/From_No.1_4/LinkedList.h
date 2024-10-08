@@ -50,7 +50,6 @@ private:
     * @param 降順か昇順か
     */
     void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
-
 public:
     /**
      * LinkedListクラスのコンストラクタ。
