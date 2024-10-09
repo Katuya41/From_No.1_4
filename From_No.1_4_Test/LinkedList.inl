@@ -223,7 +223,7 @@ void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _com
  * @param 降順か昇順か
  */
 template <typename T>
-typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, std::function<bool(T&, T&)> _compare)
+typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare)
 {
     //ピポット設定(一番最後の要素)
     NODE* Pivod = _high;

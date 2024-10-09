@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "LinkedList.h"
+#include "main.h"
 
 using namespace std;
 

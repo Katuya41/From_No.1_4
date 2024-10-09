@@ -55,7 +55,7 @@ private:
     * @param ÅŒã‚Ìƒm[ƒh
     * @param ~‡‚©¸‡‚©
     */
-    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(T&, T&)> _compare);
+    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare);
 
     /*
      * ŒğŠ·‚ğs‚¤ŠÖ”‚Å‚·
