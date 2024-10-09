@@ -37,7 +37,7 @@ private:
     };
 
     //ダミーノード
-    static NODE* Dummy;
+    NODE* Dummy;
 
     //データの数
     int DataNum = 0;
@@ -56,7 +56,7 @@ public:
      * 初期化処理を行います。
      */
     LinkedList();
-    ~LinkedList() {}
+    ~LinkedList();
 
     /**
      * データ数を返す関数です。
@@ -77,6 +77,9 @@ public:
     * @param _it     受け取ったイテレータ
     */
     bool Delete(LinkedList<T>::ConstIterator& _it);
+
+    // ノードをすべて解放するメンバー関数
+    void Clear();
 
     /*
     * 先頭イテレータを取得する関数です。
