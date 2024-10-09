@@ -30,10 +30,10 @@ namespace ex01_DataStructure
 						エラー含めて何も起こらなければ成功です。\n
 		*//***********************************************************************************/
 		TEST(QuickSortTest, TestCheckListSortWhen1Data) {
-			LinkedList<DATA> list;
-			list.Insert(list.GetBegin(), { 10,"Test" });
+			LinkedList<int> list;
+			list.Insert(list.GetBegin(), 10);
 			//EXPECT_EQ(false, list.Sort(list, std::function( list.GetBegin() > it), true));
-			EXPECT_EQ(false, list.Sort( [](DATA a, DATA b) {return a.Score > b.Score; }));
+			EXPECT_EQ(false, list.Sort( [](int a, int b) {return a > b; }));
 
 		}
 

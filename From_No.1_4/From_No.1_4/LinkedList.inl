@@ -1,36 +1,41 @@
 #pragma once
 #include"LinkedList.h"
 
+/**
+ * LinkedListクラスのコンストラクタ。
+ * 初期化処理を行います。
+ */
 template<typename T>
 inline LinkedList<T>::LinkedList()
 {
-    Dummy = new NODE();
-    Dummy->Next = Dummy->Prev = Dummy;
+    Dummy.Next = Dummy.Prev = &Dummy;
 }
 
+/*
+* LinkedListクラスのデストラクタ。
+* リストの中身解放を行います。
+*/
 template<typename T>
 inline LinkedList<T>::~LinkedList()
 {
     //リストの中身を削除
     Clear();
-
-    //ダミーノード削除
-    delete Dummy;
 }
 
-/**
+/*
  * データ数を返す関数です。
- * 現在のデータ数を返します
+ * @return 現在のデータ数を返します
  */
 template <typename T>
 int LinkedList<T>::GetDataNum() const { return DataNum; }
 
 /**
-    * コンストイテレータを使用してリストに格納する関数です。
-    * @param _it     受け取ったイテレータ
-    * @param _score  受け取ったデータのスコア
-    * @param _name   受け取ったデータの名前
-    */
+* コンストイテレータを使用してリストに格納する関数です。
+* @param _it     受け取ったイテレータ
+* @param _score  受け取ったデータのスコア
+* @param _name   受け取ったデータの名前
+* @return bool   挿入が成功したかを返す
+*/
 template <typename T>
 bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, const T& _data)
 {
@@ -55,6 +60,7 @@ bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, const T& _data)
 /**
 * コンストイテレータを使用してリストの要素を削除する関数です。
 * @param _it     受け取ったイテレータ
+* @return bool   削除が成功したかを返す
 */
 template <typename T>
 bool LinkedList<T>::Delete(LinkedList<T>::ConstIterator& _it)
@@ -77,33 +83,31 @@ bool LinkedList<T>::Delete(LinkedList<T>::ConstIterator& _it)
 template<typename T>
 inline void LinkedList<T>::Clear()
 {
-    if (Dummy == Dummy->Prev)
+    if (&Dummy == Dummy.Prev)
     {
-        delete Dummy;
         return;
     }
 
-    NODE* Current = Dummy->Next;
+    NODE* Current = Dummy.Next;
     NODE* NextNode;
 
     do {
         NextNode = Current->Next; // 次のノードを保存
         delete Current; // 現在のノードを解放
         Current = NextNode; // 次のノードに進む
-    } while (Current != Dummy); // リストが一巡したら終了
+    } while (Current != &Dummy); // リストが一巡したら終了
 
     DataNum = 0;
-    delete Dummy;
 }
 
 /*
-    * 先頭イテレータを取得する関数です。
-    * @return 先頭イテレータ
-    */
+* 先頭イテレータを取得する関数です。
+* @return 先頭イテレータ
+*/
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::GetBegin() {
     LinkedList<T>::Iterator it;
-    it.Node = Dummy->Next;
+    it.Node = Dummy.Next;
     return it;
 }
 
@@ -125,7 +129,7 @@ typename LinkedList<T>::ConstIterator LinkedList<T>::GetConstBegin() const {
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::GetEnd() {
     LinkedList<T>::Iterator it;
-    it.Node = Dummy;
+    it.Node = &Dummy;
     return it;
 }
 
@@ -179,13 +183,14 @@ bool LinkedList<T>::ConstIterator::IsDummy() const {
 //クイックソート実装
 //参考にしたサイト:https://bi.biopapyrus.jp/cpp/algorithm/sort/quick-sort.html
 
-    /*
-     * クイックソートを行う関数です
-     * @param リスト
-     * @param 降順か昇順か(>で昇順 , <で降順)
-     */
+/*
+* クイックソートを行う関数です
+* @param リスト
+* @param 降順か昇順か(>で昇順 , <で降順)
+* @return ソートが成功したか返します。
+*/
 template <typename T>
-bool LinkedList<T>::Sort(std::function<bool(T, T)> _compare) {
+bool LinkedList<T>::Sort(std::function<bool(const T&, const T&)> _compare) {
     //要素数が1以上か
     if (this->GetDataNum() <= 1)
         return false;
@@ -210,6 +215,7 @@ bool LinkedList<T>::Sort(std::function<bool(T, T)> _compare) {
  * @param 最初のノード
  * @param 最後のノード
  * @param 降順か昇順か
+ * @return 更新されたピポッドの位置を返す
  */
 template <typename T>
 void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare)

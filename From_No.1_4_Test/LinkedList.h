@@ -4,6 +4,7 @@
 //#include <string>
 
 #include <functional>
+#include <cassert>
 
 /**
  * これはLinkedListクラスの説明です。
@@ -36,7 +37,7 @@ private:
     };
 
     //ダミーノード
-    NODE* Dummy;
+    NODE Dummy;
 
     //データの数
     int DataNum = 0;
@@ -50,11 +51,12 @@ private:
     void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
 
     /*
-    * 分割を行う関数です
-    * @param 最初のノード
-    * @param 最後のノード
-    * @param 降順か昇順か
-    */
+     * 分割を行う関数です
+     * @param 最初のノード
+     * @param 最後のノード
+     * @param 降順か昇順か
+     * @return 更新されたピポッドの位置を返す
+     */
     NODE* Partition(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare);
 
     /*
@@ -67,15 +69,19 @@ private:
 public:
     /**
      * LinkedListクラスのコンストラクタ。
-     * LinkedListクラスのデストラクタ。
      * 初期化処理を行います。
      */
     LinkedList();
+
+    /*
+     * LinkedListクラスのデストラクタ。
+    * リストの中身解放を行います。
+    */
     ~LinkedList();
 
-    /**
+    /*
      * データ数を返す関数です。
-     * 現在のデータ数を返します
+     * @return 現在のデータ数を返します
      */
     int GetDataNum() const;
 
@@ -84,12 +90,14 @@ public:
     * @param _it     受け取ったイテレータ
     * @param _score  受け取ったデータのスコア
     * @param _name   受け取ったデータの名前
+    * @return bool   挿入が成功したかを返す
     */
-    bool Insert(LinkedList<T>::ConstIterator& _it,const T& _data);
+    bool Insert(LinkedList<T>::ConstIterator& _it, const T& _data);
 
     /**
     * コンストイテレータを使用してリストの要素を削除する関数です。
     * @param _it     受け取ったイテレータ
+    * @return bool   削除が成功したかを返す
     */
     bool Delete(LinkedList<T>::ConstIterator& _it);
 
@@ -138,8 +146,9 @@ public:
      * クイックソートを行う関数です
      * @param リスト
      * @param 降順か昇順か(>で昇順 , <で降順)
+     * @return ソートが成功したか返します。
      */
-    bool Sort(std::function<bool(T, T)> _compare);
+    bool Sort(std::function<bool(const T&, const T&)> _compare);
 
     /*
     * これはConstIteratorクラスの説明です。
