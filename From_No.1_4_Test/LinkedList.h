@@ -4,7 +4,6 @@
 //#include <string>
 
 #include <functional>
-#include "pch.h"
 
 /**
  * これはLinkedListクラスの説明です。
@@ -49,6 +48,21 @@ private:
     * @param 降順か昇順か
     */
     void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
+
+    /*
+    * 分割を行う関数です
+    * @param 最初のノード
+    * @param 最後のノード
+    * @param 降順か昇順か
+    */
+    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(T&, T&)> _compare);
+
+    /*
+     * 交換を行う関数です
+     * @param 交換するデータ1
+     * @param 交換するデータ2
+     */
+    void Swap(T& _data1, T& _data2);
 
 public:
     /**
@@ -123,22 +137,6 @@ public:
      * @param 降順か昇順か(>で昇順 , <で降順)
      */
     bool Sort(std::function<bool(T, T)> _compare);
-
-
-    /*
-     * 分割を行う関数です
-     * @param 最初のノード
-     * @param 最後のノード
-     * @param 降順か昇順か
-     */
-    NODE* Partition(NODE* _low, NODE* _high, std::function<bool(T&, T&)> _compare);
-
-    /*
-     * 交換を行う関数です
-     * @param 交換するデータ1
-     * @param 交換するデータ2
-     */
-    void Swap(T& _data1, T& _data2);
 
     /*
     * これはConstIteratorクラスの説明です。
