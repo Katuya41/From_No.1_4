@@ -29,11 +29,10 @@ inline LinkedList<T>::~LinkedList()
 template <typename T>
 int LinkedList<T>::GetDataNum() const { return DataNum; }
 
-/**
+/*
 * コンストイテレータを使用してリストに格納する関数です。
 * @param _it     受け取ったイテレータ
-* @param _score  受け取ったデータのスコア
-* @param _name   受け取ったデータの名前
+* @param _data   受け取ったデータ
 * @return bool   挿入が成功したかを返す
 */
 template <typename T>
@@ -175,17 +174,11 @@ typename LinkedList<T>::Iterator LinkedList<T>::end()
 template <typename T>
 typename bool LinkedList<T>::ConstIterator::IsEmpty() { return Node == nullptr; }
 
-template <typename T>
-bool LinkedList<T>::ConstIterator::IsDummy() const {
-    return this->Node == LinkedList<T>::Dummy;
-}
-
 //クイックソート実装
 //参考にしたサイト:https://bi.biopapyrus.jp/cpp/algorithm/sort/quick-sort.html
 
 /*
 * クイックソートを行う関数です
-* @param リスト
 * @param 降順か昇順か(>で昇順 , <で降順)
 * @return ソートが成功したか返します。
 */
@@ -218,7 +211,7 @@ bool LinkedList<T>::Sort(std::function<bool(const T&, const T&)> _compare) {
  * @return 更新されたピポッドの位置を返す
  */
 template <typename T>
-void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare)
+void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare)
 {
     if (_low != _high && _low != _high->Next) {
         NODE* Pivod = Partition(_low, _high, _compare);
@@ -351,6 +344,7 @@ const T& LinkedList<T>::ConstIterator::operator*() const { return this->Node->Da
 
 /*
  * 代入するオペレータです
+ * @param 代入するコンストイテレータ
  *@return コンストイテレータを返します
 */
 template <typename T>
@@ -364,6 +358,7 @@ typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator=(c
 
 /*
  * 比較するオペレータです
+ * @param 比較するコンストイテレータ
  * @return 同一かを返します
 */
 template <typename T>
@@ -373,6 +368,7 @@ bool LinkedList<T>::ConstIterator::operator==(const LinkedList<T>::ConstIterator
 
 /*
  * 比較するオペレータです
+ * @param 比較するコンストイテレータ
  * @return 異なるかを返します
 */
 template <typename T>
@@ -395,6 +391,7 @@ T& LinkedList<T>::Iterator::operator*() {
 
 /*
  * 比較するオペレータです
+ * @param 比較するイテレータ
  * @return 同一かを返します
 */
 template <typename T>
@@ -404,6 +401,7 @@ bool LinkedList<T>::Iterator::operator==(const LinkedList<T>::Iterator& _it) con
 
 /*
  * 比較するオペレータです
+ * @param 比較するイテレータ
  * @return 異なるかを返します
 */
 template <typename T>

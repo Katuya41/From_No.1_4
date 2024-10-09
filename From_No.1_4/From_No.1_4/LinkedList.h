@@ -88,8 +88,7 @@ public:
     /**
     * コンストイテレータを使用してリストに格納する関数です。
     * @param _it     受け取ったイテレータ
-    * @param _score  受け取ったデータのスコア
-    * @param _name   受け取ったデータの名前
+    * @param _data   受け取ったデータ
     * @return bool   挿入が成功したかを返す
     */
     bool Insert(LinkedList<T>::ConstIterator& _it, const T& _data);
@@ -144,7 +143,6 @@ public:
 
     /*
      * クイックソートを行う関数です
-     * @param リスト
      * @param 降順か昇順か(>で昇順 , <で降順)
      * @return ソートが成功したか返します。
      */
@@ -161,8 +159,6 @@ public:
     {
     private:
         friend class LinkedList;
-
-        bool IsDummy() const;
 
     protected:
         //ノード
@@ -204,28 +200,32 @@ public:
 
         /*
          * イテレータのさす要素を取得するオペレータ(const)です
-         * @return ノードを返します
+         * @return データを返します
         */
         const T& operator*() const;
         /*
          * コピ－コンストラクタです
+         * @param コピーする対象
         */
         LinkedList::ConstIterator(const LinkedList::ConstIterator& _constit) : Node(_constit.Node) {}
 
         /*
          * 代入するオペレータです
+         * @param 代入するイテレータ
          *@return コンストイテレータを返します
         */
         LinkedList::ConstIterator& operator=(const Iterator& _it);
 
         /*
          * 比較するオペレータです
+         * @param 比較するコンストイテレータ
          * @return 同一かを返します
         */
         bool operator==(const LinkedList::ConstIterator& _constit) const;
 
         /*
          * 比較するオペレータです
+         * @param 比較するコンストイテレータ
          * @return 異なるかを返します
         */
         bool operator!=(const LinkedList::ConstIterator& _constit) const;
@@ -258,12 +258,14 @@ public:
 
         /*
          * 比較するオペレータです
+         * @param 比較するイテレータ
          * @return 同一かを返します
         */
         bool operator==(const LinkedList::Iterator& _it) const;
 
         /*
          * 比較するオペレータです
+         * @param 比較するイテレータ
          * @return 異なるかを返します
         */
         bool operator!=(const LinkedList::Iterator& _it) const;
