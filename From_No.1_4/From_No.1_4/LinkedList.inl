@@ -11,7 +11,11 @@ inline LinkedList<T>::LinkedList()
 template<typename T>
 inline LinkedList<T>::~LinkedList()
 {
+    //リストの中身を削除
     Clear();
+
+    //ダミーノード削除
+    delete Dummy;
 }
 
 /**
@@ -67,6 +71,9 @@ bool LinkedList<T>::Delete(LinkedList<T>::ConstIterator& _it)
     return false;
 }
 
+/*
+* リストの中身を全て削除する関数です。
+*/
 template<typename T>
 inline void LinkedList<T>::Clear()
 {

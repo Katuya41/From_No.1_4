@@ -93,7 +93,9 @@ public:
     */
     bool Delete(LinkedList<T>::ConstIterator& _it);
 
-    // ノードをすべて解放するメンバー関数
+    /*
+    * リストの中身を全て削除する関数です。
+    */
     void Clear();
 
     /*
