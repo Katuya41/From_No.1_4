@@ -25,19 +25,19 @@ private:
     /**
      *ノードを入れる構造体です。
      *
-     * @param Prev  前のノード
-     * @param Next  次のノード
+     * @param prev  前のノード
+     * @param next  次のノード
      * @param Data  データ
      */
     struct NODE
     {
         NODE* Prev = nullptr;     //一個前のノード
         NODE* Next = nullptr;     //次のノード
-        T* Data = nullptr;        //データ
+        T Data = T();             //データ
     };
 
     //ダミーノード
-    NODE Dummy;
+    static NODE* Dummy;
 
     //データの数
     int DataNum = 0;
@@ -55,10 +55,7 @@ public:
      * LinkedListクラスのコンストラクタ。
      * 初期化処理を行います。
      */
-    LinkedList() {
-        Dummy.Next = Dummy.Prev = &Dummy;
-        //Dummy.T.Name = "Dummy";
-    }
+    LinkedList();
     ~LinkedList() {}
 
     /**
@@ -152,6 +149,8 @@ public:
     private:
         friend class LinkedList;
 
+        bool IsDummy() const;
+
     protected:
         //ノード
         NODE* Node = nullptr;
@@ -204,7 +203,7 @@ public:
          * 代入するオペレータです
          *@return コンストイテレータを返します
         */
-        LinkedList::ConstIterator operator=(const Iterator* _it);
+        LinkedList::ConstIterator& operator=(const Iterator& _it);
 
         /*
          * 比較するオペレータです

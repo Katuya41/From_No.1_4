@@ -1,6 +1,16 @@
 #pragma once
 #include"LinkedList.h"
 
+template<typename T>
+typename LinkedList<T>::NODE* LinkedList<T>::Dummy = nullptr;  // 静的メンバー変数の定義
+
+template<typename T>
+inline LinkedList<T>::LinkedList()
+{
+    Dummy = new NODE();
+    Dummy->Next = Dummy->Prev = Dummy;
+}
+
 /**
  * データ数を返す関数です。
  * 現在のデータ数を返します
@@ -22,10 +32,8 @@ bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, const T& _data)
     {
         //新しいノード作成
         NODE* NewNode = new NODE();
-        T* Data = new T();
-        *Data = _data;
 
-        NewNode->Data = Data;
+        NewNode->Data = _data;
         NewNode->Next = _it.Node;
         NewNode->Prev = _it.Node->Prev;
         _it.Node->Prev->Next = NewNode;
@@ -63,7 +71,7 @@ bool LinkedList<T>::Delete(LinkedList<T>::ConstIterator& _it)
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::GetBegin() {
     LinkedList<T>::Iterator it;
-    it.Node = Dummy.Next;
+    it.Node = Dummy->Next;
     return it;
 }
 
@@ -85,7 +93,7 @@ typename LinkedList<T>::ConstIterator LinkedList<T>::GetConstBegin() const {
 template <typename T>
 typename LinkedList<T>::Iterator LinkedList<T>::GetEnd() {
     LinkedList<T>::Iterator it;
-    it.Node = &Dummy;
+    it.Node = Dummy;
     return it;
 }
 
@@ -130,6 +138,11 @@ typename LinkedList<T>::Iterator LinkedList<T>::end()
 */
 template <typename T>
 typename bool LinkedList<T>::ConstIterator::IsEmpty() { return Node == nullptr; }
+
+template <typename T>
+bool LinkedList<T>::ConstIterator::IsDummy() const {
+    return this->Node == LinkedList<T>::Dummy;
+}
 
 //クイックソート実装
 //参考にしたサイト:https://bi.biopapyrus.jp/cpp/algorithm/sort/quick-sort.html
@@ -195,7 +208,7 @@ typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, 
     while (it.Node != _high)
     {
         //ピポッドより小さい
-        if (_compare((*Pivod->Data), (*it)))
+        if (_compare((Pivod->Data), (*it)))
         {
             {
                 if (i == nullptr)
@@ -203,7 +216,7 @@ typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, 
                 else
                     i = i->Next;
 
-                Swap((*i->Data), (*it));
+                Swap((i->Data), (*it));
             }
         }
         it++;
@@ -214,7 +227,7 @@ typename LinkedList<T>::NODE* LinkedList<T>::Partition(NODE* _low, NODE* _high, 
         i = _low;
     else
         i = i->Next;
-    Swap((*i->Data), (*_high->Data));
+    Swap((i->Data), (_high->Data));
     return i;  // ピボットの新しい位置を返す
 }
 
@@ -238,9 +251,10 @@ void LinkedList<T>::Swap(T& _data1, T& _data2) {
 template <typename T>
 typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator++()
 {
-    assert(Node != nullptr && "Iterator points to null!");
-    assert(Node->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
     this->Node = Node->Next;
+    assert(IsDummy() != true && "Iterator points to Dummy!");
+    //assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
     return *this;
 }
 
@@ -251,11 +265,12 @@ typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator++(
 template <typename T>
 typename LinkedList<T>::ConstIterator LinkedList<T>::ConstIterator::operator++(int)
 {
-    assert(Node != nullptr && "Iterator points to null!");
-    assert(Node->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
     LinkedList::Iterator it;
     it.Node = Node;
     Node = Node->Next;
+    assert(IsDummy() != true && "Iterator points to Dummy!");
+    //assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
     return it;
 }
 
@@ -265,9 +280,10 @@ typename LinkedList<T>::ConstIterator LinkedList<T>::ConstIterator::operator++(i
 */
 template <typename T>
 typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator--() {
-    assert(Node != nullptr && "Iterator points to null!");
-    assert(Node->Prev->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
     this->Node = Node->Prev;
+    assert(this->IsDummy() != true && "Iterator points to Dummy!");
+    //assert(this->Node->Prev->Data != nullptr && "Iterator points to Dummy!");
     return *this;
 }
 
@@ -277,11 +293,12 @@ typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator--(
 */
 template <typename T>
 typename LinkedList<T>::ConstIterator LinkedList<T>::ConstIterator::operator--(int) {
-    assert(Node != nullptr && "Iterator points to null!");
-    assert(Node->Prev->Data != nullptr && "Iterator points to Dummy!");
+    assert(this->Node != nullptr && "Iterator points to null!");
     LinkedList::Iterator it;
     it.Node = Node;
     Node = Node->Prev;
+    assert(IsDummy() != true && "Iterator points to Dummy!");
+    //assert(this->Node->Prev->Data != nullptr && "Iterator points to Dummy!");
     return it;
 }
 
@@ -290,18 +307,17 @@ typename LinkedList<T>::ConstIterator LinkedList<T>::ConstIterator::operator--(i
  * @return ノードを返します
 */
 template <typename T>
-const T& LinkedList<T>::ConstIterator::operator*() const { return *this->Node->Data; }
+const T& LinkedList<T>::ConstIterator::operator*() const { return this->Node->Data; }
 
 /*
  * 代入するオペレータです
  *@return コンストイテレータを返します
 */
 template <typename T>
-typename LinkedList<T>::ConstIterator LinkedList<T>::ConstIterator::operator=(const Iterator* _it) {
-    if (this != _it) {
-        LinkedList::ConstIterator NewConst;
-        NewConst = _it;
-        return NewConst;
+typename LinkedList<T>::ConstIterator& LinkedList<T>::ConstIterator::operator=(const Iterator& _it) {
+    if ((*this) != _it) {
+        this->Node = _it.Node;
+        return *this;
     }
     return *this;
 }
@@ -331,9 +347,10 @@ bool LinkedList<T>::ConstIterator::operator!=(const LinkedList<T>::ConstIterator
 */
 template <typename T>
 T& LinkedList<T>::Iterator::operator*() {
-    assert(Node != nullptr && "Iterator points to null!");
-    assert(Node->Data != nullptr && "Iterator points to Dummy!");
-    return *this->Node->Data;
+    assert(this->Node != nullptr && "Iterator points to null!");
+    assert(IsDummy() != true && "Iterator points to Dummy!");
+    //assert(this->Node->Data != nullptr && "Iterator points to Dummy!");
+    return this->Node->Data;
 }
 
 /*
