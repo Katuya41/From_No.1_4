@@ -73,7 +73,7 @@ public:
     * @param _score  受け取ったデータのスコア
     * @param _name   受け取ったデータの名前
     */
-    bool Insert(LinkedList<T>::ConstIterator& _it, T _data);
+    bool Insert(LinkedList<T>::ConstIterator& _it,const T& _data);
 
     /**
     * コンストイテレータを使用してリストの要素を削除する関数です。
@@ -100,22 +100,22 @@ public:
     LinkedList<T>::Iterator GetEnd();
 
     /*
-    * 末尾イテレータを取得する関数です。
-    * @return 末尾イテレータ
-    */
-    LinkedList<T>::Iterator Getend();
-
-    /*
      * 末尾コンストイテレータを取得する関数です。
      * @return ダミーノード
      */
     LinkedList<T>::ConstIterator GetConstEnd();
 
     /*
-     * 末尾コンストイテレータを取得する関数です。
-     * @return 末尾イテレータ
-     */
-    LinkedList<T>::ConstIterator GetConstend();
+    * 範囲forに対応するbegin関数です。
+    * @return 先頭イテレータ
+    */
+    Iterator begin();
+
+    /*
+    * 範囲forに対応するend関数です。
+    * @return 末尾イテレータ
+    */
+    Iterator end();
 
     /*
      * クイックソートを行う関数です

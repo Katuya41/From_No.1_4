@@ -15,14 +15,17 @@ int LinkedList<T>::GetDataNum() const { return DataNum; }
     * @param _name   受け取ったデータの名前
     */
 template <typename T>
-bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, T _data)
+bool LinkedList<T>::Insert(LinkedList<T>::ConstIterator& _it, const T& _data)
 {
     //イテレータが空じゃないか確認
     if (!_it.IsEmpty())
     {
         //新しいノード作成
         NODE* NewNode = new NODE();
-        NewNode->Data = new T(_data);
+        T* Data = new T();
+        *Data = _data;
+
+        NewNode->Data = Data;
         NewNode->Next = _it.Node;
         NewNode->Prev = _it.Node->Prev;
         _it.Node->Prev->Next = NewNode;
@@ -87,18 +90,6 @@ typename LinkedList<T>::Iterator LinkedList<T>::GetEnd() {
 }
 
 /*
-* 末尾イテレータを取得する関数です。
-* @return 末尾イテレータ
-*/
-template<typename T>
-typename LinkedList<T>::Iterator LinkedList<T>::Getend()
-{
-    LinkedList<T>::Iterator it;
-    it.Node = Dummy.Prev;
-    return it;
-}
-
-/*
  * 末尾コンストイテレータを取得する関数です。
  * @return ダミーノード
  */
@@ -110,14 +101,26 @@ typename LinkedList<T>::ConstIterator LinkedList<T>::GetConstEnd() {
 }
 
 /*
- * 末尾コンストイテレータを取得する関数です。
- * @return 末尾コンストイテレータ
- */
+* 範囲forに対応するbegin関数です。
+* @return 先頭イテレータ
+*/
 template<typename T>
-typename LinkedList<T>::ConstIterator LinkedList<T>::GetConstend()
+typename LinkedList<T>::Iterator LinkedList<T>::begin()
 {
-    LinkedList<T>::ConstIterator it;
-    it.Node = Dummy.Prev;
+    LinkedList<T>::Iterator it;
+    it = GetBegin();
+    return it;
+}
+
+/*
+* 範囲forに対応するend関数です。
+* @return 末尾イテレータ
+*/
+template<typename T>
+typename LinkedList<T>::Iterator LinkedList<T>::end()
+{
+    LinkedList<T>::Iterator it;
+    it = GetEnd();
     return it;
 }
 
