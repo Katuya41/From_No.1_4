@@ -211,7 +211,7 @@ bool LinkedList<T>::Sort(std::function<bool(const T&, const T&)> _compare) {
  * @return 更新されたピポッドの位置を返す
  */
 template <typename T>
-void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare)
+void LinkedList<T>::Sort(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare)
 {
     if (_low != _high && _low != _high->Next) {
         NODE* Pivod = Partition(_low, _high, _compare);

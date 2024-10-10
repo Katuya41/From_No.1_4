@@ -48,7 +48,7 @@ private:
     * @param ÅŒã‚Ìƒm[ƒh
     * @param ~‡‚©¸‡‚©
     */
-    void Sort(NODE* _low, NODE* _high, std::function<bool(T, T)> _compare);
+    void Sort(NODE* _low, NODE* _high, std::function<bool(const T&, const T&)> _compare);
 
     /*
      * •ªŠ„‚ğs‚¤ŠÖ”‚Å‚·

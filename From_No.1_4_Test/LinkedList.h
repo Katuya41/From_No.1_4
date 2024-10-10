@@ -144,7 +144,7 @@ public:
     /*
      * クイックソートを行う関数です
      * @param 降順か昇順か(>で昇順 , <で降順)
-     * @return ソートが成功したか返します。
+     * @return 引数が正しいか返します。
      */
     bool Sort(std::function<bool(const T&, const T&)> _compare);
 

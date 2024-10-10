@@ -18,7 +18,7 @@ namespace ex01_DataStructure
 			LinkedList<DATA> list;
 			//list.Sort(list, [](const DATA& a, const DATA& b) {return a.Score < b.Score; });
 			//EXPECT_EQ(false, list.Sort(list, INT_KEY, true));
-			EXPECT_EQ(false, list.Sort([](DATA a, DATA b) {return a.Score > b.Score; }));
+			EXPECT_EQ(true, list.Sort([](DATA a, DATA b) {return a.Score > b.Score; }));
 
 		}
 
@@ -33,7 +33,7 @@ namespace ex01_DataStructure
 			LinkedList<int> list;
 			list.Insert(list.GetBegin(), 10);
 			//EXPECT_EQ(false, list.Sort(list, std::function( list.GetBegin() > it), true));
-			EXPECT_EQ(false, list.Sort( [](int a, int b) {return a > b; }));
+			EXPECT_EQ(true, list.Sort( [](int a, int b) {return a > b; }));
 
 		}
 
