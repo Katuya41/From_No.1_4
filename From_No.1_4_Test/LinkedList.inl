@@ -180,7 +180,7 @@ typename bool LinkedList<T>::ConstIterator::IsEmpty() { return Node == nullptr; 
 /*
 * クイックソートを行う関数です
 * @param 降順か昇順か(>で昇順 , <で降順)
-* @return 引数が正しいか返します。
+* @return 型などが不適切なキー指定が引数で渡された場合、falseを返します。
 */
 template <typename T>
 bool LinkedList<T>::Sort(std::function<bool(const T&, const T&)> _compare) {
